@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>咕·考研副驾驶</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="avatar">咕</div>
+    <div class="info">
+      <h1 id="nick">咕</h1>
+      <p id="goal">广州大学·新传·400+</p>
+    </div>
+    <div class="countdown" id="countdown">-- 天</div>
+  </header>
+  <div class="slogan" id="slogan">上海跨年见</div>
+
+  <section class="card">
+    <h2>今日任务 <small id="progTxt">0/0</small></h2>
+    <div class="progress-bar"><div class="progress-fill" id="progBar" style="width:0%"></div></div>
+    <div id="taskList"></div>
+    <div class="input-row">
+      <input id="taskInput" placeholder="加任务，如：英语 背单词30分钟">
+      <button onclick="addTask()">添加</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>梳子自评</h2>
+    <div class="comb-row"><span>心情</span><div class="stars" data-k="mood"></div></div>
+    <div class="comb-row"><span>专注</span><div class="stars" data-k="focus"></div></div>
+    <div class="comb-row"><span>精力</span><div class="stars" data-k="energy"></div></div>
+    <button class="btn" onclick="saveComb()">保存梳子</button>
+  </section>
+
+  <section class="card">
+    <h2>复盘 <small><a href="mobile.html">手机版</a></small></h2>
+    <div class="review-tabs">
+      <button class="review-tab on" data-type="day">日</button>
+      <button class="review-tab" data-type="week">周</button>
+      <button class="review-tab" data-type="month">月</button>
+    </div>
+    <div class="review-q">
+      <label>1. 做得最好的事</label>
+      <textarea id="rq1"></textarea>
+    </div>
+    <div class="review-q">
+      <label>2. 没做好 / 拖延了</label>
+      <textarea id="rq2"></textarea>
+    </div>
+    <div class="review-q">
+      <label>3. 下一步最小行动</label>
+      <textarea id="rq3"></textarea>
+    </div>
+    <div class="score-row">
+      <span>完成度</span>
+      <input type="range" id="rscore" min="0" max="100" value="70">
+      <strong id="rscoreVal">70</strong>
+    </div>
+    <button class="btn" onclick="saveReview()">保存并生成 AI 小结</button>
+    <div class="ai-result" id="aiResult"></div>
+    <button class="btn ghost" onclick="toggleHist()">历史归档</button>
+    <div id="histList" style="display:none"></div>
+  </section>
+
+  <section class="card">
+    <h2>设置</h2>
+    <div class="set-row"><label>昵称</label><input id="setNick"></div>
+    <div class="set-row"><label>目标</label><input id="setGoal"></div>
+    <div class="set-row"><label>倒计时日期</label><input id="setDeadline" placeholder="2026-12-21"></div>
+    <div class="set-row"><label>API Key</label><input id="setKey" placeholder="sk-..."></div>
+    <div class="set-row"><label>Base URL</label><input id="setBase" value="https://open.bigmodel.cn/api/paas/v4/"></div>
+    <div class="set-row"><label>模型</label><input id="setModel" value="glm-4.7-flash"></div>
+    <button class="btn" onclick="saveSettings()">保存设置</button>
+    <button class="btn alt" onclick="testAI()">测试连接</button>
+    <button class="btn ghost" onclick="exportData()">导出数据</button>
+    <button class="btn ghost" onclick="importData()">导入数据</button>
+    <button class="btn ghost" onclick="diag()">诊断</button>
+    <pre class="diag-box" id="diagBox" style="display:none"></pre>
+  </section>
+</div>
+
+<script src="ai.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

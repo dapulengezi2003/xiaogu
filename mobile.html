@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>咕·考研副驾驶（手机版）</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#F7FBF8,#FFFDF7);color:#2C3E35;min-height:100vh;padding-bottom:90px;-webkit-tap-highlight-color:transparent}
+.header{padding:18px 16px 10px;position:sticky;top:0;background:rgba(247,251,248,.95);backdrop-filter:blur(10px);z-index:50}
+.h-top{display:flex;align-items:center;justify-content:space-between}
+.avatar{width:38px;height:38px;border-radius:50%;background:#A8DCC8;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.h-info{flex:1;margin-left:10px}
+.h-info b{font-size:15px}
+.h-info span{font-size:12px;color:#7A9E8E}
+.cd{background:#FFD45A;color:#2C3E35;font-size:12px;font-weight:600;padding:4px 10px;border-radius:12px}
+.slogan{text-align:center;color:#FF6F9E;font-size:13px;margin-top:6px;font-weight:500}
+.card{background:#fff;border-radius:20px;padding:16px;margin:12px 16px;box-shadow:0 2px 12px rgba(168,220,200,.12)}
+.ct{font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ct small{font-weight:400;color:#55B97E}
+.bar{height:8px;background:#E8F6EE;border-radius:4px;overflow:hidden;margin:6px 0}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#A8DCC8,#55B97E)}
+.task{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #F0F7F3}
+.task:last-child{border:0}
+.chk{width:22px;height:22px;border-radius:50%;border:2px solid #A8DCC8;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff}
+.chk.on{background:#55B97E;border-color:#55B97E}
+.t-main{flex:1;font-size:14px}
+.t-main.done{text-decoration:line-through;color:#A0B8AD}
+.tag{font-size:11px;padding:1px 7px;border-radius:8px;margin-right:5px}
+.s-英语{background:#E8F4FD;color:#4FA7E8}.s-政治{background:#FDE8E8;color:#E84F4F}.s-专业课{background:#E8F6EE;color:#55B97E}.s-其他{background:#F0F0F0;color:#666}
+.row{display:flex;gap:8px;margin-top:10px}
+.row input{flex:1;padding:9px 12px;border:2px solid #E0EFE8;border-radius:12px;background:#F7FBF8;outline:none;font-size:14px}
+.row button{padding:9px 16px;border:0;border-radius:12px;background:#55B97E;color:#fff;font-weight:600;font-size:14px}
+.btn{display:block;width:100%;padding:12px;border:0;border-radius:14px;background:#A8DCC8;color:#143027;font-weight:700;font-size:14px;margin-top:8px}
+.btn.alt{background:#FFD45A}
+.btn.ghost{background:#F0F7F3;color:#55B97E}
+.comb{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.stars span{font-size:20px;opacity:.3}
+.stars span.on{opacity:1}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{padding:7px 14px;border-radius:12px;background:#F0F7F3;color:#7A9E8E;font-size:13px;font-weight:500}
+.tab.on{background:#55B97E;color:#fff}
+.q{margin-bottom:12px}
+.q label{font-size:13px;font-weight:600;display:block;margin-bottom:5px}
+.q textarea{width:100%;min-height:64px;padding:10px;border:2px solid #E0EFE8;border-radius:12px;background:#F7FBF8;font-size:14px;outline:none;resize:vertical}
+.score{display:flex;align-items:center;gap:12px;margin:10px 0}
+.score b{font-size:22px;color:#55B97E}
+input[type=range]{flex:1}
+.ai-box{background:#F7FBF8;border:2px dashed #A8DCC8;border-radius:14px;padding:12px;font-size:14px;white-space:pre-wrap;min-height:60px;color:#2C3E35}
+.hist-item{background:#F7FBF8;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px}
+.hist-item b{font-size:12px;color:#55B97E}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:flex-end;z-index:200}
+.modal.show{display:flex}
+.sheet{background:#fff;width:100%;max-height:80vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 16px 30px}
+.sheet h3{font-size:16px;margin-bottom:12px}
+.set-row{margin-bottom:14px}
+.set-row label{font-size:13px;font-weight:600;display:block;margin-bottom:5px}
+.set-row input,.set-row textarea{width:100%;padding:10px;border:2px solid #E0EFE8;border-radius:12px;background:#F7FBF8;font-size:14px;outline:none}
+.diag{background:#2C3E35;color:#A8DCC8;font-size:12px;padding:10px;border-radius:12px;white-space:pre-wrap;margin-top:10px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E0EFE8;display:flex;justify-content:space-around;padding:8px 0 18px;z-index:100}
+.nav div{font-size:11px;color:#7A9E8E;text-align:center}
+.nav div.on{color:#55B97E;font-weight:700}
+.nav .ic{font-size:20px;display:block;margin-bottom:2px}
+.page{display:none}
+.page.on{display:block}
+.toast{position:fixed;left:50%;top:30%;transform:translateX(-50%);background:#2C3E35;color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;z-index:999;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="h-top">
+    <div class="avatar">咕</div>
+    <div class="h-info"><b id="nick">咕</b><br><span id="goal">广州大学·新传·400+</span></div>
+    <div class="cd" id="countdown">-- 天</div>
+  </div>
+  <div class="slogan" id="slogan">上海跨年见</div>
+</div>
+
+<section class="page on" id="p-home">
+  <div class="card">
+    <div class="ct">今日进度 <small id="progTxt">0/0</small></div>
+    <div class="bar"><i id="progBar" style="width:0%"></i></div>
+  </div>
+  <div class="card">
+    <div class="ct">今日清单 <small class="btn ghost" style="padding:4px 10px;margin:0" onclick="showPage('p-review')">去复盘</small></div>
+    <div id="taskList"></div>
+    <div class="row">
+      <input id="taskInput" placeholder="加任务，如：英语 背单词30分钟">
+      <button onclick="addTask()">添加</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">提醒</div>
+    <div class="task"><div class="chk">⏱</div><div class="t-main">去番茄钟打卡（别的软件）</div></div>
+    <div class="task"><div class="chk">✍️</div><div class="t-main">去心光写日记（别的软件）</div></div>
+  </div>
+</section>
+
+<section class="page" id="p-routine">
+  <div class="card">
+    <div class="ct">每日作息 <small>名称/时间自填</small></div>
+    <div id="routineList"></div>
+    <div class="row">
+      <input id="rtName" placeholder="如：早起">
+      <input id="rtTime" placeholder="07:00" style="max-width:90px">
+      <button onclick="addRoutine()">加</button>
+    </div>
+  </div>
+  <div class="card">
